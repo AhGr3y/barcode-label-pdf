@@ -27,15 +27,15 @@ func main() {
 	pdf.SetFont("Arial", "", 12)
 
 	// MAWB No
-	drawTextWithNewline(0, 0, 30, "MAWB No: 131-04455301", pdf)
+	drawTextWithNewline(0, 0, 30, "MAWB No: 000-00000000", pdf)
 	drawImage(9, 20, 0, 15, filename, pdf)
 
 	// HAWB No
-	drawTextWithNewline(0, 10, 30, "HAWB No: XASUZ2407476", pdf)
+	drawTextWithNewline(0, 10, 30, "HAWB No: 12345", pdf)
 	drawImage(9, 55, 0, 15, filename, pdf)
 
 	// Shipper
-	drawTextWithNewline(0, 20, 30, "Shipper: JIANGSU DINGS' INTELLIGENT CONTROL TECHNOLOGY CO., LTD", pdf)
+	drawTextWithNewline(0, 20, 30, "Shipper: Some Shipper", pdf)
 	drawImage(9, 90, 0, 15, filename, pdf)
 
 	// No. of package(s)
@@ -43,11 +43,11 @@ func main() {
 	drawImage(9, 125, 0, 15, filename, pdf)
 
 	// Gross weight (kg)
-	drawTextWithNewline(0, 40, 30, "Gross weight (kg): 94.00", pdf)
+	drawTextWithNewline(0, 40, 30, "Gross weight (kg): 1.00", pdf)
 	drawImage(9, 160, 0, 15, filename, pdf)
 
 	// Gross weight (kg)
-	drawTextWithNewline(0, 50, 30, "Chargeable weight (kg): 94.00", pdf)
+	drawTextWithNewline(0, 50, 30, "Chargeable weight (kg): 1.00", pdf)
 	drawImage(9, 195, 0, 15, filename, pdf)
 
 	err = pdf.OutputFileAndClose("/mnt/c/Users/AWOT/Desktop/test.pdf")
