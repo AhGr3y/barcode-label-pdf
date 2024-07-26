@@ -1,7 +1,7 @@
 package main
 
 import (
-	"image/png"
+	"image/jpeg"
 	"os"
 
 	"github.com/boombuler/barcode"
@@ -34,23 +34,24 @@ func generateBarcode(content string) (barcode.Barcode, error) {
 }
 
 // generateBarcodeFile - Uses <barcode> to generate a <filename>.png file
-// in the ./output directory.
-func generateBarcodeFile(barcode barcode.Barcode, filename string) error {
+// in the ./output directory. Returns the relative path to the file from the
+// root directory if file successfully created.
+func generateBarcodeFile(barcode barcode.Barcode, filename string) (string, error) {
 
-	filename = "./output/" + filename + ".png"
+	filename = "./output/" + filename + ".jpeg"
 
 	// create the output file
 	file, err := os.Create(filename)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer file.Close()
 
 	// encode the barcode as png
-	err = png.Encode(file, barcode)
+	err = jpeg.Encode(file, barcode, nil)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return nil
+	return filename, nil
 }
