@@ -14,7 +14,7 @@ func generateBarcode(content string) (barcode.Barcode, error) {
 
 	// Handling edge cases
 	if content == "" || len(content) > 80 {
-		return nil, errors.New("content length must be between 1 and 79 inclusive")
+		return nil, errors.New("each entry must be between 1 and 79 characters (inclusive)")
 	}
 
 	// Create the barcode

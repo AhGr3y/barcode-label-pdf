@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/jung-kurt/gofpdf"
@@ -25,6 +24,8 @@ func drawImage(x, y, w, h float64, filename string, pdf *gofpdf.Fpdf) {
 	pdf.ImageOptions(filename, x, y, w, h, false, gofpdf.ImageOptions{ImageType: "JPEG", ReadDpi: true}, 0, "")
 }
 
+// generatePDF - Takes in string <inputs> and generates
+// a PDF with the generated barcodes.
 func generatePDF(inputs []string) error {
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
@@ -43,13 +44,13 @@ func generatePDF(inputs []string) error {
 
 		barcode, err := generateBarcode(input)
 		if err != nil {
-			log.Fatalf("Error generating barcode: %s", err)
+			return err
 		}
 
 		fileBasename := strconv.Itoa(i)
 		filePathname, err := generateBarcodeFile(barcode, fileBasename)
 		if err != nil {
-			log.Fatalf("Error creating barcode file: %s", err)
+			return err
 		}
 
 		text := prefixes[i] + input
@@ -61,7 +62,7 @@ func generatePDF(inputs []string) error {
 
 	err := pdf.OutputFileAndClose("/mnt/c/Users/AWOT/Desktop/test.pdf")
 	if err != nil {
-		log.Fatalf("Error creating file: %s", err)
+		return err
 	}
 
 	return nil

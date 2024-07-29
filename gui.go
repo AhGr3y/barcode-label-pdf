@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"time"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
@@ -11,9 +11,13 @@ import (
 
 func runGUI() {
 	a := app.New()
-	w := a.NewWindow("MyApp")
-	w.Resize(fyne.NewSize(300, 400))
+	w := a.NewWindow("Barcode PDF Generator")
+	w.Resize(fyne.NewSize(800, 550))
 
+	// Logger for displaying information to users
+	logger := widget.NewLabel("> Welcome to Barcode PDF Generator!")
+
+	// Entry widgets for each form field
 	mawbEntry := widget.NewEntry()
 	hawbEntry := widget.NewEntry()
 	shipperEntry := widget.NewEntry()
@@ -38,6 +42,7 @@ func runGUI() {
 		},
 		SubmitText: "Generate PDF",
 		OnSubmit: func() {
+
 			inputs := []string{
 				mawbEntry.Text,
 				hawbEntry.Text,
@@ -47,8 +52,12 @@ func runGUI() {
 				cwEntry.Text,
 			}
 			err := generatePDF(inputs)
+			now := time.Now().Format(time.DateTime)
 			if err != nil {
-				log.Printf("Error generating pdf: %s", err)
+				logger.SetText("> " + now + ": " + err.Error())
+			}
+			if err == nil {
+				logger.SetText("> " + now + ": PDF Generated!")
 			}
 		},
 		CancelText: "Exit Application",
@@ -60,7 +69,13 @@ func runGUI() {
 	w.SetContent(
 		container.NewBorder(
 			nil,
-			nil,
+			container.NewBorder(
+				widget.NewSeparator(),
+				nil,
+				nil,
+				nil,
+				logger,
+			),
 			nil,
 			nil,
 			form,
