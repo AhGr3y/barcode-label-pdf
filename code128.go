@@ -38,7 +38,7 @@ func generateBarcode(content string) (barcode.Barcode, error) {
 	return bcode, nil
 }
 
-// generateBarcodeFile - Uses <barcode> to generate a <filename>.png file
+// generateBarcodeFile - Uses <barcode> to generate a <filename>.jpeg file
 // in the ./output directory. Returns the relative path to the file from the
 // root directory if file successfully created.
 func generateBarcodeFile(barcode barcode.Barcode, fileBasename string) (string, error) {
@@ -52,7 +52,7 @@ func generateBarcodeFile(barcode barcode.Barcode, fileBasename string) (string, 
 	}
 	defer file.Close()
 
-	// encode the barcode as png
+	// encode the barcode as jpeg
 	err = jpeg.Encode(file, barcode, nil)
 	if err != nil {
 		return "", err
