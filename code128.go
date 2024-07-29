@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"image/jpeg"
 	"os"
 
@@ -10,6 +11,11 @@ import (
 
 // generateBarcode - Uses <content> to generate a code128 barcode.
 func generateBarcode(content string) (barcode.Barcode, error) {
+
+	// Handling edge cases
+	if content == "" || len(content) > 80 {
+		return nil, errors.New("content length must be between 1 and 79 inclusive")
+	}
 
 	// Create the barcode
 	bc, err := code128.Encode(content)
