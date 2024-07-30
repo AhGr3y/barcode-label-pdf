@@ -13,11 +13,6 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-const (
-	CODE128 = "code128"
-	QRCODE  = "qrcode"
-)
-
 func getCodeTypeAndTemplateNameFromFilename(filename string) (string, string, error) {
 
 	if filename == "" {
@@ -82,24 +77,26 @@ func showTemplatesPage(w fyne.Window) {
 			buttons = append(buttons, createButtonFromTemplate(templateFile, w))
 		}
 
-		templates = container.NewVBox(
-			buttons...,
+		templates = container.NewCenter(
+			container.NewVBox(
+				buttons...,
+			),
 		)
 	}
 
-	w.SetContent(
+	content := container.NewBorder(
+		nil,
 		container.NewBorder(
-			nil,
-			container.NewBorder(
-				widget.NewSeparator(),
-				nil,
-				nil,
-				nil,
-				logger,
-			),
+			widget.NewSeparator(),
 			nil,
 			nil,
-			templates,
+			nil,
+			logger,
 		),
+		nil,
+		nil,
+		templates,
 	)
+
+	w.SetContent(content)
 }
