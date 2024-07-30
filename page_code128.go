@@ -14,11 +14,22 @@ func showCode128Page(w fyne.Window) {
 
 	// Entry widgets for each form field
 	mawbEntry := widget.NewEntry()
+	mawbEntry.SetPlaceHolder("Enter text here...")
+
 	hawbEntry := widget.NewEntry()
+	hawbEntry.SetPlaceHolder("Enter text here...")
+
 	shipperEntry := widget.NewEntry()
+	shipperEntry.SetPlaceHolder("Enter text here...")
+
 	pkgsEntry := widget.NewEntry()
+	pkgsEntry.SetPlaceHolder("Enter text here...")
+
 	gwEntry := widget.NewEntry()
+	gwEntry.SetPlaceHolder("Enter text here...")
+
 	cwEntry := widget.NewEntry()
+	cwEntry.SetPlaceHolder("Enter text here...")
 
 	form := &widget.Form{
 		Items: []*widget.FormItem{
