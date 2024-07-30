@@ -13,14 +13,19 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-func getTemplateNameFromFilename(filename string) (string, error) {
+const (
+	CODE128 = "code128"
+	QRCODE  = "qrcode"
+)
+
+func getCodeTypeAndTemplateNameFromFilename(filename string) (string, string, error) {
 
 	if filename == "" {
-		return "", errors.New("unable to get template name from empty string")
+		return "", "", errors.New("unable to get template name from empty string")
 	}
 
 	split := strings.Split(filename, "_")
-	return split[1], nil
+	return split[0], split[1], nil
 }
 
 func createButtonFromTemplate(templateFile fs.DirEntry, w fyne.Window) *widget.Button {
@@ -32,7 +37,7 @@ func createButtonFromTemplate(templateFile fs.DirEntry, w fyne.Window) *widget.B
 	}
 	defer file.Close()
 
-	templateName, err := getTemplateNameFromFilename(templateFile.Name())
+	codeType, templateName, err := getCodeTypeAndTemplateNameFromFilename(templateFile.Name())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,7 +52,9 @@ func createButtonFromTemplate(templateFile fs.DirEntry, w fyne.Window) *widget.B
 	}
 
 	button := widget.NewButton(templateName, func() {
-		showCode128Page(fields, w)
+		if codeType == CODE128 {
+			showCode128Page(fields, w)
+		}
 	})
 
 	return button
