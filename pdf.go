@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-	"path/filepath"
 	"strconv"
 
 	"github.com/jung-kurt/gofpdf"
@@ -62,20 +60,11 @@ func generatePDF(inputs []string) (string, error) {
 
 	}
 
-	// Get user's home directory
-	homeDir, err := os.UserHomeDir()
+	filepath := "./output/barcodepdf.pdf"
+	err := pdf.OutputFileAndClose(filepath)
 	if err != nil {
 		return "", err
 	}
 
-	// Construct path to the Desktop directory
-	desktopPath := filepath.Join(homeDir, "Desktop", "barcodepdf.pdf")
-	//fmt.Println(desktopPath)
-	//filepath := "/mnt/c/Users/AWOT/Desktop/barcodepdf.pdf"
-	err = pdf.OutputFileAndClose(desktopPath)
-	if err != nil {
-		return "", err
-	}
-
-	return desktopPath, nil
+	return filepath, nil
 }
