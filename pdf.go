@@ -26,19 +26,10 @@ func drawImage(x, y, w, h float64, filename string, pdf *gofpdf.Fpdf) {
 
 // generatePDF - Takes in string <inputs> and generates
 // a PDF with the generated barcodes.
-func generatePDF(inputs []string) (string, error) {
+func generatePDF(inputs []string, prefixes []string) (string, error) {
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
 	pdf.SetFont("Arial", "", 12)
-
-	prefixes := []string{
-		"MAWB No: ",
-		"HAWB No: ",
-		"Shipper: ",
-		"No. of package(s): ",
-		"Gross weight (kg): ",
-		"Chargeable weight (kg): ",
-	}
 
 	for i, input := range inputs {
 

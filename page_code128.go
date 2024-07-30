@@ -8,56 +8,44 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-func showCode128Page(w fyne.Window) {
+func showCode128Page(fields []string, w fyne.Window) {
 	// Logger for displaying information to users
-	logger := widget.NewLabel("> Welcome to Barcode PDF Generator!")
+	logger := widget.NewLabel("> Fill in the fields to generate a PDF.")
 
-	// Entry widgets for each form field
-	mawbEntry := widget.NewEntry()
-	mawbEntry.SetPlaceHolder("Enter text here...")
+	entries := []*widget.Entry{}
 
-	hawbEntry := widget.NewEntry()
-	hawbEntry.SetPlaceHolder("Enter text here...")
+	for range fields {
+		entry := widget.NewEntry()
+		entry.SetPlaceHolder("Enter text here...")
+		entries = append(entries, entry)
+	}
 
-	shipperEntry := widget.NewEntry()
-	shipperEntry.SetPlaceHolder("Enter text here...")
+	items := []*widget.FormItem{}
 
-	pkgsEntry := widget.NewEntry()
-	pkgsEntry.SetPlaceHolder("Enter text here...")
-
-	gwEntry := widget.NewEntry()
-	gwEntry.SetPlaceHolder("Enter text here...")
-
-	cwEntry := widget.NewEntry()
-	cwEntry.SetPlaceHolder("Enter text here...")
+	for i, entry := range entries {
+		items = append(items, &widget.FormItem{
+			Text:   "",
+			Widget: &fyne.Container{},
+		})
+		items = append(items, &widget.FormItem{
+			Text:   fields[i] + ":",
+			Widget: entry,
+		})
+	}
 
 	form := &widget.Form{
-		Items: []*widget.FormItem{
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "MAWB No:", Widget: mawbEntry},
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "HAWB No:", Widget: hawbEntry},
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "Shipper:", Widget: shipperEntry},
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "No of package(s):", Widget: pkgsEntry},
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "Gross weight (kg):", Widget: gwEntry},
-			{Text: "", Widget: &fyne.Container{}},
-			{Text: "Chargeable weight (kg):", Widget: cwEntry},
-		},
+		Items:      items,
 		SubmitText: "Generate PDF",
 		OnSubmit: func() {
+			inputs := []string{}
+			prefixes := []string{}
 
-			inputs := []string{
-				mawbEntry.Text,
-				hawbEntry.Text,
-				shipperEntry.Text,
-				pkgsEntry.Text,
-				gwEntry.Text,
-				cwEntry.Text,
+			for i, entry := range entries {
+				inputs = append(inputs, entry.Text)
+				prefixes = append(prefixes, fields[i]+": ")
 			}
-			filepath, err := generatePDF(inputs)
+
+			filepath, err := generatePDF(inputs, prefixes)
 			now := time.Now().Format(time.DateTime)
 			if err != nil {
 				logger.SetText("> " + now + ": " + err.Error())

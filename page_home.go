@@ -17,7 +17,7 @@ func showHomepage(w fyne.Window) {
 	)
 
 	helperLabel := widget.NewLabelWithStyle(
-		"Select one of the formats below to get started:",
+		"View your templates here:",
 		fyne.TextAlignCenter,
 		fyne.TextStyle{
 			Italic: true,
@@ -26,14 +26,14 @@ func showHomepage(w fyne.Window) {
 
 	exitButton := widget.NewButton("Exit", func() { w.Close() })
 
-	code128Button := widget.NewButton("Code128", func() { showCode128Page(w) })
+	templatesButton := widget.NewButton("Templates", func() { showTemplatesPage(w) })
 
 	content := container.NewCenter(
 		container.NewVBox(
 			titleLabel,
 			widget.NewLabel(""),
 			helperLabel,
-			code128Button,
+			templatesButton,
 			widget.NewLabel("\n"),
 			exitButton,
 		),
