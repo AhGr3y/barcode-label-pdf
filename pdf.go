@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -71,12 +70,12 @@ func generatePDF(inputs []string) (string, error) {
 
 	// Construct path to the Desktop directory
 	desktopPath := filepath.Join(homeDir, "Desktop", "barcodepdf.pdf")
-	fmt.Println(desktopPath)
-	filepath := "/mnt/c/Users/AWOT/Desktop/barcodepdf.pdf"
-	err = pdf.OutputFileAndClose(filepath)
+	//fmt.Println(desktopPath)
+	//filepath := "/mnt/c/Users/AWOT/Desktop/barcodepdf.pdf"
+	err = pdf.OutputFileAndClose(desktopPath)
 	if err != nil {
 		return "", err
 	}
 
-	return filepath, nil
+	return desktopPath, nil
 }
