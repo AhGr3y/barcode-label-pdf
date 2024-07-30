@@ -29,7 +29,7 @@ func drawImage(x, y, w, h float64, filename string, pdf *gofpdf.Fpdf) {
 
 // generatePDF - Takes in string <inputs> and generates
 // a PDF with the generated barcodes.
-func generatePDF(inputs []string) error {
+func generatePDF(inputs []string) (string, error) {
 	pdf := gofpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
 	pdf.SetFont("Arial", "", 12)
@@ -47,35 +47,36 @@ func generatePDF(inputs []string) error {
 
 		barcode, err := generateBarcode(input)
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		fileBasename := strconv.Itoa(i)
-		filePathname, err := generateBarcodeFile(barcode, fileBasename)
+		relativeFilepath, err := generateBarcodeFile(barcode, fileBasename)
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		text := prefixes[i] + input
 		imageY := float64(20 + (35 * i))
 		drawTextWithNewline(0, float64(10*i), 30, text, pdf)
-		drawImage(9, imageY, 0, 15, filePathname, pdf)
+		drawImage(9, imageY, 0, 15, relativeFilepath, pdf)
 
 	}
 
 	// Get user's home directory
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Construct path to the Desktop directory
-	desktopPath := filepath.Join(homeDir, "Desktop", "generated_barcode.pdf")
+	desktopPath := filepath.Join(homeDir, "Desktop", "barcodepdf.pdf")
 	fmt.Println(desktopPath)
-	err = pdf.OutputFileAndClose("/mnt/c/Users/AWOT/Desktop/test.pdf")
+	filepath := "/mnt/c/Users/AWOT/Desktop/barcodepdf.pdf"
+	err = pdf.OutputFileAndClose(filepath)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return nil
+	return filepath, nil
 }

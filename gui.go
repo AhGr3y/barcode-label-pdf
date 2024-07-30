@@ -51,13 +51,13 @@ func runGUI() {
 				gwEntry.Text,
 				cwEntry.Text,
 			}
-			err := generatePDF(inputs)
+			filepath, err := generatePDF(inputs)
 			now := time.Now().Format(time.DateTime)
 			if err != nil {
 				logger.SetText("> " + now + ": " + err.Error())
 			}
 			if err == nil {
-				logger.SetText("> " + now + ": PDF Generated!")
+				logger.SetText("> " + now + ": PDF generated at " + filepath)
 			}
 		},
 		CancelText: "Exit Application",
