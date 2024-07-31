@@ -20,3 +20,13 @@ Just run the following command to open the GUI.
 ```bash
 go run .
 ```
+
+## Examples
+
+Homepage:
+
+![homepage](./examples/homepage.png)
+
+Output:
+
+![output](./examples/output.png)
