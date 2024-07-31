@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/container"
@@ -58,7 +59,8 @@ func createButtonFromTemplate(templateFile fs.DirEntry, w fyne.Window) *widget.B
 func showTemplatesPage(w fyne.Window) {
 
 	var templates *fyne.Container
-	logger := widget.NewLabel("> Select a template.")
+	timeNow := time.Now().Format(time.DateTime)
+	logger := widget.NewLabel("> " + timeNow + ": Select a template.")
 
 	templateFiles, err := os.ReadDir("./templates")
 	if err != nil {
@@ -69,17 +71,31 @@ func showTemplatesPage(w fyne.Window) {
 		templates = container.NewCenter(
 			widget.NewButton("Back to Homepage", func() { showHomepage(w) }),
 		)
-		logger.SetText("> There are no templates, please create a template to get started.")
+		logger.SetText("> " + timeNow + ": There are no templates, please create a template to get started.")
 	} else {
-		// Create a button for each templateFile
+		helpLabel := widget.NewLabelWithStyle(
+			"Select one of these template(s):",
+			fyne.TextAlignCenter,
+			fyne.TextStyle{
+				Italic: true,
+			},
+		)
+
 		buttons := []fyne.CanvasObject{}
 		for _, templateFile := range templateFiles {
 			buttons = append(buttons, createButtonFromTemplate(templateFile, w))
 		}
 
+		homeButton := widget.NewButton("Back to Homepage", func() { showHomepage(w) })
+
 		templates = container.NewCenter(
 			container.NewVBox(
-				buttons...,
+				helpLabel,
+				container.NewVBox(
+					buttons...,
+				),
+				widget.NewLabel("\n"),
+				homeButton,
 			),
 		)
 	}

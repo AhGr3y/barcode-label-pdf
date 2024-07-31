@@ -10,7 +10,8 @@ import (
 
 func showCode128Page(fields []string, w fyne.Window) {
 	// Logger for displaying information to users
-	logger := widget.NewLabel("> Fill in the fields to generate a PDF.")
+	timeNow := time.Now().Format(time.DateTime)
+	logger := widget.NewLabel("> " + timeNow + ": Fill in the fields to generate a PDF.")
 
 	entries := []*widget.Entry{}
 
@@ -46,12 +47,11 @@ func showCode128Page(fields []string, w fyne.Window) {
 			}
 
 			filepath, err := generatePDF(inputs, prefixes)
-			now := time.Now().Format(time.DateTime)
 			if err != nil {
-				logger.SetText("> " + now + ": " + err.Error())
+				logger.SetText("> " + timeNow + ": " + err.Error())
 			}
 			if err == nil {
-				logger.SetText("> " + now + ": PDF generated at " + filepath)
+				logger.SetText("> " + timeNow + ": PDF generated at " + filepath)
 			}
 		},
 		CancelText: "Back to Homepage",
