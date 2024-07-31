@@ -15,7 +15,7 @@ git clone https://github.com/AhGr3y/barcode-label-pdf.git
 
 ## Usage
 
-Just run the following command to open the GUI.
+Just run the following command to open the GUI:
 
 ```bash
 go run .
