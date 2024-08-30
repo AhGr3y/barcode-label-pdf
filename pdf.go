@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"os"
 	"strconv"
 
 	"github.com/jung-kurt/gofpdf"
@@ -51,7 +53,15 @@ func generatePDF(inputs []string, prefixes []string) (string, error) {
 
 	}
 
-	filepath := "./output/barcodepdf.pdf"
+	// It will throw an error if inputs' length is less than 2.
+	hawbNo := inputs[1]
+	outputFilename := hawbNo + "_barcodes"
+	userProfile := os.Getenv("USERPROFILE")
+	if userProfile == "" {
+		return "", errors.New("USERPROFILE not set")
+	}
+	filepath := userProfile + "\\downloads\\" + outputFilename + ".pdf"
+
 	err := pdf.OutputFileAndClose(filepath)
 	if err != nil {
 		return "", err
