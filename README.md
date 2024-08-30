@@ -21,14 +21,14 @@ Just run the following command to open the GUI:
 go run .
 ```
 
-## To run on Windows.
+## Usage (Windows)
 
-```bash
-fyne-cross windows -app-id com.example.barcode-pdf-generator
-```
 1. Generate the executable `.exe`.
     - This will generate a `.zip` file which contains the `.exe` file in the `./fyne-cross/dist/` directory.
     - You can use any name other than 'com.example.barcode-pdf.generator' as long as it's a unique name throughout your system.
+```bash
+fyne-cross windows -app-id com.example.barcode-pdf-generator
+```
 2. Create a folder anywhere in your Windows system, then copy the `/output` and `/templates` directory into the folder.
     - The application needs the files inside these directories to run.
 3. Run the application!
