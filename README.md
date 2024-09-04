@@ -26,7 +26,7 @@ To clone this repo:
 git clone https://github.com/AhGr3y/barcode-label-pdf.git
 ```
 
-### Usage
+### Run the program
 
 Just run the following command to open the GUI:
 
