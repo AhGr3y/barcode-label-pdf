@@ -1,4 +1,4 @@
-# Barcode PDF Generator
+# Barcodez
 Generate a PDF with custom barcodes from user inputs via a GUI.
 
 ## Pre-requisites
