@@ -26,7 +26,7 @@ To clone this repo:
 git clone https://github.com/AhGr3y/barcode-label-pdf.git
 ```
 
-### Usage (Linux)
+### Usage
 
 Just run the following command to open the GUI:
 
@@ -34,7 +34,7 @@ Just run the following command to open the GUI:
 go run .
 ```
 
-### Usage (Windows)
+## Running Using a Windows Executable (.exe)
 
 1. Generate the executable `.exe`.
     - This will generate a `.zip` file which contains the `.exe` file in the `./fyne-cross/dist/` directory.
