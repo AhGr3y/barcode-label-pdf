@@ -2,7 +2,7 @@
 A GUI tool that generates barcodes in multiple formats and outputs them as PDF.
 
 ## Motivation
-I once used an application that generated barcodes, but some of the barcodes did not turn out right due to special characters used or character limitation of that application. That led me to build barcodez which allowed any characters to be used.
+I once used an application that generated barcodes, but some of the barcodes did not turn out right due to special characters used or had character limitations. That led me to build barcodez which allowed any characters to be used.
 
 ## Pre-requisites
 Runs on linux/amd64.\
