@@ -1,6 +1,9 @@
 # Barcodez
 A GUI tool that generates barcodes in multiple formats and outputs them as PDF.
 
+## Motivation
+Why spend time to generate barcodes one at a time when you can generate multiple barcodes at the same time!
+
 ## Pre-requisites
 Runs on linux/amd64.\
 Make sure you have at least Go v1.22.3 installed.
