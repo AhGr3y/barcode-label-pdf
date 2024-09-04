@@ -16,7 +16,7 @@ I once used an application that generated barcodes, but some of the barcodes did
 
 ### Pre-requisites
 Runs on linux/amd64.\
-Make sure you have at least Go v1.22.3 installed.
+You should gave a working Go environment, if not please see [https://go.dev/doc/install](this page) first.
 
 ### Clone this repository
 
