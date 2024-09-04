@@ -1,5 +1,5 @@
 # Barcodez
-Generate a PDF with custom barcodes from user inputs via a GUI.
+A GUI tool that generates barcodes in multiple formats and outputs them as PDF.
 
 ## Pre-requisites
 Runs on linux/amd64.\
