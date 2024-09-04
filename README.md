@@ -46,6 +46,6 @@ fyne-cross windows -app-id com.example.barcode-pdf-generator
     - The application needs the files inside these directories to run.
 3. Run the application!
 
-
-
+## Contributing
+Feel free to fork the repository and open a pull request to the `main` branch. I'd be happy to review it.
 
